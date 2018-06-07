@@ -1,4 +1,6 @@
 #! /bin/bash
+where_bin=$(readlink -n `which wx-init`)
+project_root=$(dirname $(dirname ${where_bin}))
 if [ ! -d "$2" ]; then
   mkdir $2
 fi
@@ -6,14 +8,13 @@ case $1 in
 page)
   for ext in js json wxss wxml
   do
-  str=s/\${page}/$2/g
-    sed s/\${page}/$2/g $(dirname $(dirname $0))/snippets/mini-program-page/index.$ext > ./$2/$2.$ext
+    sed s/\${page}/$2/g ${project_root}/snippets/mini-program-page/index.$ext > ./$2/$2.$ext
   done
   ;;
 component)
   for ext in js json wxss wxml
   do
-    sed s/\${component}/$2/g $(dirname $(dirname $0))/snippets/mini-program-component/index.$ext > ./$2/$2.$ext
+    sed s/\${component}/$2/g ${project_root}/snippets/mini-program-component/index.$ext > ./$2/$2.$ext
   done
   ;;
 esac

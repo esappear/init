@@ -5,13 +5,28 @@ if [ ! -d "$2" ]; then
   mkdir $2
 fi
 case $1 in
-page)
+mp)
+  cp -rf ${project_root}/snippets/mini-program/* ./$2
+  ;;
+mp-page-ts)
+  for ext in ts json wxss wxml
+  do
+    sed s/\${page}/$2/g ${project_root}/snippets/mini-program-page-ts/index.$ext > ./$2/$2.$ext
+  done
+  ;;
+mp-component-ts)
+  for ext in ts json wxss wxml
+  do
+    sed s/\${component}/$2/g ${project_root}/snippets/mini-program-component-ts/index.$ext > ./$2/$2.$ext
+  done
+  ;;
+mp-page)
   for ext in js json wxss wxml
   do
     sed s/\${page}/$2/g ${project_root}/snippets/mini-program-page/index.$ext > ./$2/$2.$ext
   done
   ;;
-component)
+mp-component)
   for ext in js json wxss wxml
   do
     sed s/\${component}/$2/g ${project_root}/snippets/mini-program-component/index.$ext > ./$2/$2.$ext

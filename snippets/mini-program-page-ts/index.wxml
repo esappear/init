@@ -1,1 +1,4 @@
 <!--${page}.wxml-->
+<scroll-view class="container">
+  
+</scroll-view>
